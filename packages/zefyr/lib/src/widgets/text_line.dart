@@ -35,13 +35,12 @@ class TextLine extends StatelessWidget {
       return EmbedProxy(child: embedBuilder(context, embed));
     }
     final text = buildText(context, node);
-    final strutStyle =
-        StrutStyle.fromTextStyle(text.style, forceStrutHeight: true);
+    final strutStyle = StrutStyle.fromTextStyle(text.style, forceStrutHeight: true);
     return RichTextProxy(
       textStyle: text.style,
       textDirection: textDirection,
       strutStyle: strutStyle,
-      locale: Localizations.localeOf(context, nullOk: true),
+      locale: Localizations.localeOf(context),
       child: RichText(
         text: buildText(context, node),
         textDirection: textDirection,
@@ -53,9 +52,7 @@ class TextLine extends StatelessWidget {
 
   TextSpan buildText(BuildContext context, LineNode node) {
     final theme = ZefyrTheme.of(context);
-    final children = node.children
-        .map((node) => _segmentToTextSpan(node, theme))
-        .toList(growable: false);
+    final children = node.children.map((node) => _segmentToTextSpan(node, theme)).toList(growable: false);
     return TextSpan(
       style: _getParagraphTextStyle(node.style, theme),
       children: children,

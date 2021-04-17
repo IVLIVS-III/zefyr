@@ -3,8 +3,7 @@ import 'package:notus/notus.dart';
 
 import 'editor.dart';
 
-mixin RawEditorStateSelectionDelegateMixin on EditorState
-    implements TextSelectionDelegate {
+mixin RawEditorStateSelectionDelegateMixin on EditorState implements TextSelectionDelegate {
   @override
   TextEditingValue get textEditingValue {
     return widget.controller.plainTextEditingValue;
@@ -12,8 +11,7 @@ mixin RawEditorStateSelectionDelegateMixin on EditorState
 
   @override
   set textEditingValue(TextEditingValue value) {
-    widget.controller
-        .updateSelection(value.selection, source: ChangeSource.local);
+    widget.controller.updateSelection(value.selection, source: ChangeSource.local);
   }
 
   @override
@@ -22,7 +20,7 @@ mixin RawEditorStateSelectionDelegateMixin on EditorState
   }
 
   @override
-  void hideToolbar() {
+  void hideToolbar([bool hideHandles = true]) {
     if (selectionOverlay?.toolbarIsVisible == true) {
       selectionOverlay?.hideToolbar();
     }
