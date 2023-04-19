@@ -24,7 +24,7 @@ class TextLine extends StatefulWidget {
   final bool readOnly;
   final ZefyrController controller;
   final ZefyrEmbedBuilder embedBuilder;
-  final ValueChanged<String?>? onLaunchUrl;
+  final ValueChanged<Uri?>? onLaunchUrl;
   final LinkActionPicker linkActionPicker;
 
   const TextLine({
@@ -194,7 +194,7 @@ class _TextLineState extends State<TextLine> {
 
   void _tapLink(Node segment) {
     final link = (segment as StyledNode).style.get(NotusAttribute.link)!.value;
-    widget.onLaunchUrl!(link);
+    widget.onLaunchUrl!(Uri.tryParse(link!));
   }
 
   void _longPressLink(Node segment) async {
@@ -202,7 +202,7 @@ class _TextLineState extends State<TextLine> {
     final action = await widget.linkActionPicker(segment);
     switch (action) {
       case LinkMenuAction.launch:
-        widget.onLaunchUrl!(link);
+        widget.onLaunchUrl!(Uri.tryParse(link));
         break;
       case LinkMenuAction.copy:
         // ignore: unawaited_futures

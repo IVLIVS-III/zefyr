@@ -4,7 +4,6 @@
 import 'dart:convert';
 
 import 'package:notus/notus.dart';
-import 'package:notus/src/document/embeds.dart';
 import 'package:quill_delta/quill_delta.dart';
 import 'package:test/test.dart';
 

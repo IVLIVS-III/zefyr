@@ -23,7 +23,7 @@ class EditableTextBlock extends StatelessWidget {
   final bool hasFocus;
   final ZefyrEmbedBuilder embedBuilder;
   final LinkActionPicker linkActionPicker;
-  final ValueChanged<String?>? onLaunchUrl;
+  final ValueChanged<Uri?>? onLaunchUrl;
   final EdgeInsets? contentPadding;
 
   const EditableTextBlock({

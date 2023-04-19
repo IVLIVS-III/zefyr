@@ -193,7 +193,7 @@ class _NotusMarkdownEncoder extends Converter<Delta, String> {
 
   void _writeHeadingTag(StringBuffer buffer, NotusAttribute<int> heading) {
     var level = heading.value!;
-    buffer.write('#' * level + ' ');
+    buffer.write('${'#' * level} ');
   }
 
   void _writeBlockTag(StringBuffer buffer, NotusAttribute<String> block,

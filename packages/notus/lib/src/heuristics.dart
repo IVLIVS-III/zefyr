@@ -5,9 +5,6 @@
 import 'package:notus/notus.dart';
 import 'package:quill_delta/quill_delta.dart';
 
-import 'heuristics/delete_rules.dart';
-import 'heuristics/format_rules.dart';
-import 'heuristics/insert_rules.dart';
 
 /// Registry for insert, format and delete heuristic rules used by
 /// [NotusDocument] documents.

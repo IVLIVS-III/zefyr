@@ -4,18 +4,25 @@ version: 1.0.0-rc.5
 homepage: https://github.com/memspace/zefyr
 
 environment:
-  sdk: '>=2.15.0 <3.0.0'
+  sdk: '>=2.18.0 <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  collection: ^1.14.6
-  url_launcher: ^6.0.9
-  quill_delta: ^3.0.0-nullsafety.1
+  collection: ^1.17.0
+  url_launcher: ^6.1.10
+  quill_delta: ^3.0.0-nullsafety.2
   notus: ^1.0.0-rc.2
-  characters: ^1.0.0
+  characters: ^1.2.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.4
+  flutter_lints: ^2.0.1
+
+
+dependency_overrides:
+  notus:
+    git:
+      url: https://github.com/IVLIVS-III/zefyr.git
+      path: packages/notus

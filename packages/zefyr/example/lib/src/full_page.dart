@@ -96,9 +96,9 @@ class _FullPageEditorScreenState extends State<FullPageEditorScreen> {
     return Theme(data: ThemeData(primarySwatch: Colors.cyan), child: result);
   }
 
-  void _launchUrl(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
+  void _launchUrl(Uri url) async {
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
     }
   }
 

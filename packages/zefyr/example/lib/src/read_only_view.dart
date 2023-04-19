@@ -51,10 +51,10 @@ class _ReadOnlyViewState extends State<ReadOnlyView> {
     );
   }
 
-  void _launchUrl(String url) async {
-    final result = await canLaunch(url);
+  void _launchUrl(Uri url) async {
+    final result = await canLaunchUrl(url);
     if (result) {
-      await launch(url);
+      await launchUrl(url);
     }
   }
 

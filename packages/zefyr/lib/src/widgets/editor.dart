@@ -180,7 +180,7 @@ class ZefyrEditor extends StatefulWidget {
   final ScrollPhysics? scrollPhysics;
 
   /// Callback to invoke when user wants to launch a URL.
-  final ValueChanged<String?>? onLaunchUrl;
+  final ValueChanged<Uri?>? onLaunchUrl;
 
   /// Builder function for embeddable objects.
   ///
@@ -540,7 +540,7 @@ class RawEditor extends StatefulWidget {
 
   /// Callback which is triggered when the user wants to open a URL from
   /// a link in the document.
-  final ValueChanged<String?>? onLaunchUrl;
+  final ValueChanged<Uri?>? onLaunchUrl;
 
   /// Configuration of toolbar options.
   ///
@@ -1199,7 +1199,7 @@ class RawEditorState extends EditorState
         return;
       }
 
-      final viewport = RenderAbstractViewport.of(renderEditor)!;
+      final viewport = RenderAbstractViewport.of(renderEditor);
       final editorOffset = renderEditor.localToGlobal(const Offset(0.0, 0.0),
           ancestor: viewport);
       final offsetInViewport = _scrollController.offset + editorOffset.dy;
@@ -1526,6 +1526,17 @@ class RawEditorState extends EditorState
     PasteTextIntent: _makeOverridable(CallbackAction<PasteTextIntent>(
         onInvoke: (PasteTextIntent intent) => pasteText(intent.cause))),
   };
+
+  @override
+  void didChangeInputControl(
+      TextInputControl? oldControl, TextInputControl? newControl) {
+    // TODO: implement didChangeInputControl
+  }
+
+  @override
+  void performSelector(String selectorName) {
+    // TODO: implement performSelector
+  }
 }
 
 class _Editor extends MultiChildRenderObjectWidget {
@@ -1589,13 +1600,6 @@ class _Editor extends MultiChildRenderObjectWidget {
     renderObject.padding = padding;
     renderObject.maxContentWidth = maxContentWidth;
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    // TODO
-//    properties.add(EnumProperty<Axis>('direction', direction));
-  }
 }
 
 /// An interface for retriving the logical text boundary (left-closed-right-open)
@@ -1646,6 +1650,7 @@ class _CodeUnitBoundary extends _TextBoundary {
   @override
   TextPosition getLeadingTextBoundaryAt(TextPosition position) =>
       TextPosition(offset: position.offset);
+
   @override
   TextPosition getTrailingTextBoundaryAt(TextPosition position) => TextPosition(
       offset: math.min(position.offset + 1, textEditingValue.text.length));
@@ -1797,6 +1802,7 @@ class _DocumentBoundary extends _TextBoundary {
   @override
   TextPosition getLeadingTextBoundaryAt(TextPosition position) =>
       const TextPosition(offset: 0);
+
   @override
   TextPosition getTrailingTextBoundaryAt(TextPosition position) {
     return TextPosition(
