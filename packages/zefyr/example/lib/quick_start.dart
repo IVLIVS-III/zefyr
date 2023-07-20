@@ -10,7 +10,7 @@ void main() {
 }
 
 class QuickStartApp extends StatelessWidget {
-  const QuickStartApp({Key key}) : super(key: key);
+  const QuickStartApp({super.key}) : super();
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class QuickStartApp extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key key}) : super(key: key);
+  const HomePage({super.key}) : super();
 
   @override
   Widget build(BuildContext context) {

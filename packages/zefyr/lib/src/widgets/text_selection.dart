@@ -18,6 +18,11 @@ import 'package:flutter/services.dart';
 import '../rendering/editor.dart';
 import 'editor.dart';
 
+typedef DragSelectionUpdateCallback = void Function(
+  DragStartDetails startDetails,
+  DragUpdateDetails updateDetails,
+);
+
 /// A duration that controls how often the drag selection update callback is
 /// called.
 const Duration _kDragSelectionUpdateThrottle = Duration(milliseconds: 50);

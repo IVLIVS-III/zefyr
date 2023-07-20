@@ -4,7 +4,7 @@ import 'package:zefyr/zefyr.dart';
 import 'scaffold.dart';
 
 class ScrollableLayout extends StatefulWidget {
-  const ScrollableLayout({Key key}) : super(key: key);
+  const ScrollableLayout({super.key}) : super();
 
   @override
   _ScrollableLayoutState createState() => _ScrollableLayoutState();

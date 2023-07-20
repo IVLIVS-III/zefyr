@@ -10,7 +10,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:zefyr/zefyr.dart';
 
 class ZefyrLogo extends StatelessWidget {
-  const ZefyrLogo({Key key}) : super(key: key);
+  const ZefyrLogo({super.key}) : super();
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class ZefyrLogo extends StatelessWidget {
 }
 
 class FullPageEditorScreen extends StatefulWidget {
-  const FullPageEditorScreen({Key key}) : super(key: key);
+  const FullPageEditorScreen({super.key}) : super();
 
   @override
   _FullPageEditorScreenState createState() => _FullPageEditorScreenState();
@@ -46,7 +46,7 @@ class _FullPageEditorScreenState extends State<FullPageEditorScreen> {
       ZefyrController(NotusDocument.fromJson(json.decode(doc)));
   final FocusNode _focusNode = FocusNode();
   bool _editing = false;
-  StreamSubscription<NotusChange> _sub;
+  StreamSubscription<NotusChange>? _sub;
   bool _darkTheme = false;
 
   @override
@@ -60,7 +60,7 @@ class _FullPageEditorScreenState extends State<FullPageEditorScreen> {
 
   @override
   void dispose() {
-    _sub.cancel();
+    _sub?.cancel();
     super.dispose();
   }
 
@@ -96,7 +96,8 @@ class _FullPageEditorScreenState extends State<FullPageEditorScreen> {
     return Theme(data: ThemeData(primarySwatch: Colors.cyan), child: result);
   }
 
-  void _launchUrl(Uri url) async {
+  void _launchUrl(Uri? url) async {
+    if (url == null) return;
     if (await canLaunchUrl(url)) {
       await launchUrl(url);
     }

@@ -4,7 +4,7 @@ import 'package:zefyr/zefyr.dart';
 import 'scaffold.dart';
 
 class DecoratedFieldDemo extends StatefulWidget {
-  const DecoratedFieldDemo({Key key}) : super(key: key);
+  const DecoratedFieldDemo({super.key}) : super();
 
   @override
   _DecoratedFieldDemoState createState() => _DecoratedFieldDemoState();

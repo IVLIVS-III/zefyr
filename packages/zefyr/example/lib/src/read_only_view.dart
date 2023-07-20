@@ -5,7 +5,7 @@ import 'package:zefyr/zefyr.dart';
 import 'scaffold.dart';
 
 class ReadOnlyView extends StatefulWidget {
-  const ReadOnlyView({Key key}) : super(key: key);
+  const ReadOnlyView({super.key}) : super();
 
   @override
   _ReadOnlyViewState createState() => _ReadOnlyViewState();
@@ -51,7 +51,8 @@ class _ReadOnlyViewState extends State<ReadOnlyView> {
     );
   }
 
-  void _launchUrl(Uri url) async {
+  void _launchUrl(Uri? url) async {
+    if (url == null) return;
     final result = await canLaunchUrl(url);
     if (result) {
       await launchUrl(url);

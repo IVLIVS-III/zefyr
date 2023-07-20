@@ -10,7 +10,7 @@ import 'full_page.dart';
 enum _Options { darkTheme }
 
 class FormEmbeddedScreen extends StatefulWidget {
-  const FormEmbeddedScreen({Key key}) : super(key: key);
+  const FormEmbeddedScreen({super.key}) : super();
 
   @override
   _FormEmbeddedScreenState createState() => _FormEmbeddedScreenState();

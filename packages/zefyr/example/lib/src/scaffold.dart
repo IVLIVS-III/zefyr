@@ -15,18 +15,18 @@ class DemoScaffold extends StatefulWidget {
   /// Filename of the document to load into the editor.
   final String documentFilename;
   final DemoContentBuilder builder;
-  final List<Widget> actions;
-  final Widget floatingActionButton;
+  final List<Widget>? actions;
+  final Widget? floatingActionButton;
   final bool showToolbar;
 
   const DemoScaffold({
-    Key key,
-    @required this.documentFilename,
-    @required this.builder,
+    super.key,
+    required this.documentFilename,
+    required this.builder,
     this.actions,
     this.showToolbar = true,
     this.floatingActionButton,
-  }) : super(key: key);
+  }) : super();
 
   @override
   _DemoScaffoldState createState() => _DemoScaffoldState();
@@ -34,7 +34,7 @@ class DemoScaffold extends StatefulWidget {
 
 class _DemoScaffoldState extends State<DemoScaffold> {
   final _scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
-  ZefyrController _controller;
+  ZefyrController? _controller;
 
   bool _loading = false;
   bool _canSave = false;
@@ -45,10 +45,10 @@ class _DemoScaffoldState extends State<DemoScaffold> {
     if (_controller == null && !_loading) {
       _loading = true;
       final settings = Settings.of(context);
-      if (settings.assetsPath.isEmpty) {
+      if (settings.assetsPath!.isEmpty) {
         _loadFromAssets();
       } else {
-        _loadFromPath(settings.assetsPath);
+        _loadFromPath(settings.assetsPath!);
       }
     }
   }
@@ -103,10 +103,10 @@ class _DemoScaffoldState extends State<DemoScaffold> {
     const fs = LocalFileSystem();
     final file =
         fs.directory(settings.assetsPath).childFile(widget.documentFilename);
-    final data = jsonEncode(_controller.document);
+    final data = jsonEncode(_controller?.document);
     await file.writeAsString(data);
     _scaffoldMessengerKey.currentState
-        .showSnackBar(const SnackBar(content: Text('Saved.')));
+        ?.showSnackBar(const SnackBar(content: Text('Saved.')));
   }
 
   @override
@@ -140,13 +140,13 @@ class _DemoScaffoldState extends State<DemoScaffold> {
           ),
           title: _loading || widget.showToolbar == false
               ? null
-              : ZefyrToolbar.basic(controller: _controller),
+              : ZefyrToolbar.basic(controller: _controller!),
           actions: actions,
         ),
         floatingActionButton: widget.floatingActionButton,
         body: _loading
             ? const Center(child: Text('Loading...'))
-            : widget.builder(context, _controller),
+            : widget.builder(context, _controller!),
       ),
     );
   }

@@ -6,7 +6,7 @@ import 'package:quill_delta/quill_delta.dart';
 import 'package:zefyr/zefyr.dart';
 
 class EditorPage extends StatefulWidget {
-  const EditorPage({Key key}) : super(key: key);
+  const EditorPage({super.key}) : super();
 
   @override
   EditorPageState createState() => EditorPageState();
@@ -14,10 +14,10 @@ class EditorPage extends StatefulWidget {
 
 class EditorPageState extends State<EditorPage> {
   /// Allows to control the editor and the document.
-  ZefyrController _controller;
+  ZefyrController? _controller;
 
   /// Zefyr editor like any other input field requires a focus node.
-  FocusNode _focusNode;
+  FocusNode? _focusNode;
 
   @override
   void initState() {
@@ -36,7 +36,7 @@ class EditorPageState extends State<EditorPage> {
         ? const Center(child: CircularProgressIndicator())
         : ZefyrField(
             padding: const EdgeInsets.all(16),
-            controller: _controller,
+            controller: _controller!,
             focusNode: _focusNode,
           );
 
@@ -72,7 +72,7 @@ class EditorPageState extends State<EditorPage> {
   void _saveDocument(BuildContext context) {
     // Notus documents can be easily serialized to JSON by passing to
     // `jsonEncode` directly:
-    final contents = jsonEncode(_controller.document);
+    final contents = jsonEncode(_controller?.document);
     // For this example we save our document to a temporary file.
     final file = File(Directory.systemTemp.path + '/quick_start.json');
     // And show a snack bar on success.

@@ -4,7 +4,7 @@ import 'package:zefyr/zefyr.dart';
 import 'scaffold.dart';
 
 class ExpandedLayout extends StatefulWidget {
-  const ExpandedLayout({Key key}) : super(key: key);
+  const ExpandedLayout({super.key}) : super();
 
   @override
   _ExpandedLayoutState createState() => _ExpandedLayoutState();

@@ -9,7 +9,7 @@ import 'package:path_provider/path_provider.dart' as pp;
 class Settings {
   /// Path to assets folder. If set then edits to any document within this
   /// application can be saved back to the assets folder.
-  final String assetsPath;
+  final String? assetsPath;
 
   Settings({this.assetsPath});
 
@@ -32,7 +32,7 @@ class Settings {
   static Settings of(BuildContext context) {
     final widget =
         context.dependOnInheritedWidgetOfExactType<SettingsProvider>();
-    return widget.settings;
+    return widget!.settings;
   }
 
   Future<void> save() async {
@@ -47,7 +47,7 @@ class Settings {
   }
 }
 
-Future<Settings> showSettingsDialog(BuildContext context, Settings settings) {
+Future<Settings?> showSettingsDialog(BuildContext context, Settings settings) {
   return showDialog<Settings>(
       context: context, builder: (ctx) => SettingsDialog(settings: settings));
 }
@@ -55,7 +55,7 @@ Future<Settings> showSettingsDialog(BuildContext context, Settings settings) {
 class SettingsDialog extends StatefulWidget {
   final Settings settings;
 
-  const SettingsDialog({Key key, @required this.settings}) : super(key: key);
+  const SettingsDialog({super.key, required this.settings}) : super();
 
   @override
   _SettingsDialogState createState() => _SettingsDialogState();
@@ -63,12 +63,12 @@ class SettingsDialog extends StatefulWidget {
 
 class _SettingsDialogState extends State<SettingsDialog> {
   String _assetsPath = '';
-  TextEditingController _assetsPathController;
+  late TextEditingController _assetsPathController;
 
   @override
   void initState() {
     super.initState();
-    _assetsPath = widget.settings.assetsPath;
+    _assetsPath = widget.settings.assetsPath!;
     _assetsPathController = TextEditingController(text: _assetsPath);
   }
 
@@ -111,8 +111,11 @@ class _SettingsDialogState extends State<SettingsDialog> {
 class SettingsProvider extends InheritedWidget {
   final Settings settings;
 
-  const SettingsProvider({Key key, this.settings, Widget child})
-      : super(key: key, child: child);
+  const SettingsProvider({
+    super.key,
+    required this.settings,
+    required Widget child,
+  }) : super(child: child);
 
   @override
   bool updateShouldNotify(covariant SettingsProvider oldWidget) {

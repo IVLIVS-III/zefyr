@@ -15,17 +15,17 @@ import 'layout_scrollable.dart';
 import 'settings.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key key}) : super(key: key);
+  const HomePage({super.key}) : super();
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  ZefyrController _controller;
+  ZefyrController? _controller;
   final FocusNode _focusNode = FocusNode();
 
-  Settings _settings;
+  Settings? _settings;
 
   void _handleSettingsLoaded(Settings value) {
     setState(() {
@@ -57,8 +57,8 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _save() async {
     const fs = LocalFileSystem();
-    final file = fs.directory(_settings.assetsPath).childFile('welcome.note');
-    final data = jsonEncode(_controller.document);
+    final file = fs.directory(_settings!.assetsPath).childFile('welcome.note');
+    final data = jsonEncode(_controller!.document);
     await file.writeAsString(data);
   }
 
@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> {
     }
 
     return SettingsProvider(
-      settings: _settings,
+      settings: _settings!,
       child: PageLayout(
         appBar: AppBar(
           backgroundColor: Colors.grey.shade800,
@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
               icon: const Icon(Icons.settings, size: 16),
               onPressed: _showSettings,
             ),
-            if (_settings.assetsPath.isNotEmpty)
+            if (_settings!.assetsPath!.isNotEmpty)
               IconButton(
                 icon: const Icon(Icons.save, size: 16),
                 onPressed: _save,
@@ -101,7 +101,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _showSettings() async {
-    final result = await showSettingsDialog(context, _settings);
+    final result = await showSettingsDialog(context, _settings!);
     if (mounted && result != null) {
       setState(() {
         _settings = result;
@@ -161,14 +161,14 @@ class _HomePageState extends State<HomePage> {
   Widget _buildWelcomeEditor(BuildContext context) {
     return Column(
       children: [
-        ZefyrToolbar.basic(controller: _controller),
+        ZefyrToolbar.basic(controller: _controller!),
         Divider(height: 1, thickness: 1, color: Colors.grey.shade200),
         Expanded(
           child: Container(
             color: Colors.white,
             padding: const EdgeInsets.only(left: 16.0, right: 0.0),
             child: ZefyrEditor(
-              controller: _controller,
+              controller: _controller!,
               focusNode: _focusNode,
               autofocus: true,
               // readOnly: true,
@@ -182,7 +182,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _launchUrl(Uri url) async {
+  void _launchUrl(Uri? url) async {
+    if (url == null) return;
     final result = await canLaunchUrl(url);
     if (result) {
       await launchUrl(url);
@@ -194,7 +195,7 @@ class _HomePageState extends State<HomePage> {
       context,
       MaterialPageRoute(
         builder: (BuildContext context) => SettingsProvider(
-          settings: _settings,
+          settings: _settings!,
           child: const ExpandedLayout(),
         ),
       ),
@@ -206,7 +207,7 @@ class _HomePageState extends State<HomePage> {
       context,
       MaterialPageRoute(
         builder: (BuildContext context) => SettingsProvider(
-          settings: _settings,
+          settings: _settings!,
           child: const ReadOnlyView(),
         ),
       ),
@@ -218,7 +219,7 @@ class _HomePageState extends State<HomePage> {
       context,
       MaterialPageRoute(
         builder: (BuildContext context) => SettingsProvider(
-          settings: _settings,
+          settings: _settings!,
           child: const ScrollableLayout(),
         ),
       ),
@@ -230,7 +231,7 @@ class _HomePageState extends State<HomePage> {
       context,
       MaterialPageRoute(
         builder: (BuildContext context) => SettingsProvider(
-          settings: _settings,
+          settings: _settings!,
           child: const DecoratedFieldDemo(),
         ),
       ),
