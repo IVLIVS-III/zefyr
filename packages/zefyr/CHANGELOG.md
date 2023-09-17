@@ -1,3 +1,8 @@
+## 1.0.0-rc.6
+
+* Upgraded to support Flutter 3.13.4.
+
+
 ## 1.0.0-rc.5
 
 * Upgraded to support Flutter 2.10.

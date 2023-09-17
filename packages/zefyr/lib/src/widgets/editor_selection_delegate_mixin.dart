@@ -13,7 +13,6 @@ mixin RawEditorStateSelectionDelegateMixin on EditorState
     return widget.controller.plainTextEditingValue;
   }
 
-  @override
   set textEditingValue(TextEditingValue value) {
     final cursorPosition = value.selection.extentOffset;
     final oldText = widget.controller.document.toPlainText();
